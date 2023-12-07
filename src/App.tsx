@@ -8,31 +8,31 @@ interface Item {
   text: string
 }
 
-const INITIAL_ITEMS = [
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Video juegos",
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Libros",
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Series",
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Películas",
-  },
-]
+// const INITIAL_ITEMS = [
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: "Video juegos",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: "Libros",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: "Series",
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: "Películas",
+//   },
+// ]
 
 function App() {
-  const [items, setItems] = useState<Item[]>(INITIAL_ITEMS)
+  const [items, setItems] = useState<Item[]>([])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -69,8 +69,11 @@ function App() {
         <aside>
           <h1>Prueba técnica de React</h1>
           <h2>Añadir y eliminar elementos de una lista</h2>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="">
+          <form
+            onSubmit={handleSubmit}
+            aria-label="Añadir elementos a la lista"
+          >
+            <label>
               Elemento a introducir
               <input
                 type="text"
