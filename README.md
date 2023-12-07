@@ -17,3 +17,5 @@ Además, cada vez que se hace click en cualquier elemento de la lista, debe elim
 
 - [] Dar importancia a la funcionalidad y usabilidad, más que al diseño visual.
   [] El código debe ser enteramente desarrollado en Typescript.
+
+  No Responsive

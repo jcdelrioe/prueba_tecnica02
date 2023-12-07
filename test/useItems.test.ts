@@ -1,7 +1,6 @@
 import { describe, test, expect } from "vitest"
 import { renderHook, act } from "@testing-library/react"
 import { useItems } from "../src/hooks/useItems"
-import App from "../src/App"
 
 describe("useItems hook", () => {
   test("should add and remove items", () => {
