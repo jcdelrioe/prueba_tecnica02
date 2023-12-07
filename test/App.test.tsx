@@ -1,9 +1,7 @@
-import React from "react"
 import userEvent from "@testing-library/user-event"
 import { describe, test, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
 import App from "../src/App"
-import { e } from "vitest/dist/reporters-3OMQDZar.js"
 
 describe("<App />", () => {
   // test("should work", () => {
