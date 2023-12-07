@@ -1,8 +1,9 @@
 import { useState } from "react"
 import "./App.css"
 
+type ItemId = `${string}-${string}-${string}-${string}-${string}`
 interface Item {
-  id: `${string}-${string}-${string}-${string}-${string}`
+  id: ItemId
   timestamp: number
   text: string
 }
@@ -56,6 +57,12 @@ function App() {
     input.value = ""
   }
 
+  const handleRemoveItem = (id: ItemId) => () => {
+    setItems((prevItems) => {
+      return prevItems.filter((currentItem) => currentItem.id !== id)
+    })
+  }
+
   return (
     <>
       <main>
@@ -77,11 +84,20 @@ function App() {
         </aside>
         <section>
           <h2>Lista de elementos</h2>
-          <ul>
-            {items.map((item) => {
-              return <li key={item.id}>{item.text}</li>
-            })}
-          </ul>
+          {items.length === 0 ? (
+            <strong>No hay elementos en la lista</strong>
+          ) : (
+            <ul>
+              {items.map((item) => {
+                return (
+                  <li key={item.id}>
+                    {item.text}
+                    <button onClick={handleRemoveItem(item.id)}>Delete</button>
+                  </li>
+                )
+              })}
+            </ul>
+          )}
         </section>
       </main>
     </>
