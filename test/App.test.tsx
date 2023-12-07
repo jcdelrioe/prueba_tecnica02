@@ -40,7 +40,6 @@ describe("<App />", () => {
     const list = screen.getByRole("list")
     expect(list).toBeDefined()
 
-    screen.debug()
     expect(list.childNodes.length).toBe(1)
 
     //asegurarnos que lo podemos borrar

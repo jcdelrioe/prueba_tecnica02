@@ -1,8 +1,9 @@
-import { useState } from "react"
 import "./App.css"
+import { Item } from "./components/Item"
+import { useItems } from "./hooks/useItems"
 
-type ItemId = `${string}-${string}-${string}-${string}-${string}`
-interface Item {
+export type ItemId = `${string}-${string}-${string}-${string}-${string}`
+export interface Item {
   id: ItemId
   timestamp: number
   text: string
@@ -32,7 +33,7 @@ interface Item {
 // ]
 
 function App() {
-  const [items, setItems] = useState<Item[]>([])
+  const { items, addItem, removeItem } = useItems()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -46,21 +47,13 @@ function App() {
     const isInput = input instanceof HTMLInputElement
     if (!isInput || input == null) return
 
-    const newItem = {
-      id: crypto.randomUUID(),
-      text: input.value,
-      timestamp: Date.now(),
-    }
-    setItems((previous) => {
-      return [...previous, newItem]
-    })
+    addItem(input.value)
+
     input.value = ""
   }
 
   const handleRemoveItem = (id: ItemId) => () => {
-    setItems((prevItems) => {
-      return prevItems.filter((currentItem) => currentItem.id !== id)
-    })
+    removeItem(id)
   }
 
   return (
@@ -93,10 +86,11 @@ function App() {
             <ul>
               {items.map((item) => {
                 return (
-                  <li key={item.id}>
-                    {item.text}
-                    <button onClick={handleRemoveItem(item.id)}>Delete</button>
-                  </li>
+                  <Item
+                    handleClick={handleRemoveItem(item.id)}
+                    {...item}
+                    key={item.id}
+                  />
                 )
               })}
             </ul>
